@@ -1,0 +1,1379 @@
+{
+	"info": {
+		"_postman_id": "317eca49-73fd-46c8-8259-a253616cd908",
+		"name": "admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Reset Password",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"domain\" : \"cbops2\",\r\n    \"email\" : \"hetal@strinix.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/resetpassword",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"resetpassword"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Password",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"domain\" : \"cbops1\",\r\n    \"email\" : \"hetal@strinix.com\",\r\n    \"hash\" : \"94617396-f07c-4c18-abff-ad773fb8d34c\",\r\n    \"password\" : \"sample\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/password",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"password"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8254aa94-267a-4b92-9d8c-06b703e4d0e6",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\",jsonData.token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "AC1b59dba45989673eb8c6834d44f738bc",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "6c88e39045d1d0070295d269b6ba4e23",
+							"type": "string"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "origin",
+						"value": "http://localhost:8080",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"domain\" : \"cbops\",\r\n    \"email\" : \"admin@cbops.com\",\r\n    \"password\" : \"sample\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/auth/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Department",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/departments?limit=3&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"departments"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Department Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/departments/1/users/?limit=3&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"departments",
+						"1",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Department Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/departments/users/?limit=1&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"departments",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/clients?limit=3&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"clients"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SMS RECEIVED",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/sms?limit=5&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"sms"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"Hetal\",\r\n    \"lastName\" : \"Patel\",\r\n    \"email\" : \"hetal@stirnix.com\",\r\n    \"phoneNumber\" : \"+919825877461\",\r\n    \"roleId\" : 1,\r\n    \"departments\" : [1]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/users?limit=30&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "30"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Reporting To",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"accept-encoding": true,
+					"connection": true,
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/users/2/reportingto/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"2",
+						"reportingto",
+						"1"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Update role",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/users/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update client",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "businessName",
+							"value": "C and B Operations.",
+							"type": "text"
+						},
+						{
+							"key": "logo",
+							"type": "file",
+							"src": "/C:/Users/Hetal/Downloads/logo_icon_only.png",
+							"disabled": true
+						},
+						{
+							"key": "hqAddress",
+							"value": "Moline, Lliinois, IL 51265, USA....",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "color",
+							"value": "#FF00FF",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/clients/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"clients",
+						"1"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/products?limit=10000&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10000"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\" : \"a well known tested product\",\r\n    \"model\" : \"KC180\",\r\n    \"modelName\" : \"KC180 Supreme Grinder\",\r\n    \"make\" : \"Vent\",\r\n    \"hours\" : 12,\r\n    \"categrory\" : \"195\",\r\n    \"stockNo\" : \"226385\",\r\n    \"vinNo\" : \"KC180-AB12\",\r\n    \"price\" : 25000,\r\n    \"productStatusId\" : 1,\r\n    \"tag\" : \"KC180-AB12\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/products",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Product un-archived",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\" : \"a well known tested product\",\r\n    \"model\" : \"KC180\",\r\n    \"model_name\" : \"KC180 Supreme Grinder\",\r\n    \"make\" : \"Vent\",\r\n    \"hours\" : 12,\r\n    \"categrory\" : \"195\",\r\n    \"Stock_no\" : 226385,\r\n    \"vin_no\" : \"KC180-AB12\",\r\n    \"price\" : \"KC180-AB12\",\r\n    \"status\" : 1,\r\n    \"tag\" : \"KC180-AB12\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/products/1/unarchived",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
+						"1",
+						"unarchived"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Product archive",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\" : \"a well known tested product\",\r\n    \"model\" : \"KC180\",\r\n    \"model_name\" : \"KC180 Supreme Grinder\",\r\n    \"make\" : \"Vent\",\r\n    \"hours\" : 12,\r\n    \"categrory\" : \"195\",\r\n    \"Stock_no\" : 226385,\r\n    \"vin_no\" : \"KC180-AB12\",\r\n    \"price\" : \"KC180-AB12\",\r\n    \"status\" : 1,\r\n    \"tag\" : \"KC180-AB12\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/products/1/archived",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
+						"1",
+						"archived"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Product add assets ",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "type",
+							"value": "other_photo",
+							"type": "text"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/Hetal/Downloads/photo.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/products/1/assets",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"products",
+						"1",
+						"assets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product set cover photo",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/productassets/1/coverphoto?=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productassets",
+						"1",
+						"coverphoto"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Product Asset",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/productassets/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"productassets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\" : \"Alex\",\r\n    \"lastName\" : \"P\",\r\n    \"email\" : \"patelhetal@gmail.com\",\r\n    \"phone\" : 1234567890,\r\n    \"zipcode\" : 12456,\r\n    \"cityId\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/customers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Sales Rep",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sales_rep_id\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/customers/1/assignsalesrep",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers",
+						"1",
+						"assignsalesrep"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Customer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/customers?limit=3&page=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Search",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/customers?limit=3&page=1&name=het",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"customers"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "name",
+							"value": "het"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chat Group details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/chatgroups/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chatgroups",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Chat Contact ( Customers / Team list)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/chat/contacts",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat",
+						"contacts"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat To Customer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/chat/customer/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat",
+						"customer",
+						"1"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat To Sales Rep",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/chat/user/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat",
+						"user",
+						"2"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat To Group",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/chat/group/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat",
+						"group",
+						"2"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat Group",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Team A\",\r\n    \"details\": \"A team to manage customer\",\r\n    \"members\" : [1,2]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/chat/group",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat",
+						"group"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat To Group",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"toGroup\" : 2,\r\n    \"message\": \"Hi, I want to share a product with you, may I?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/chat",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat To Customer",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"toCustomer\" : 1,\r\n    \"message\": \"Hi, I want to share a product with you, may I?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/chat",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		},
+		{
+			"name": "Chat To Sales Rep",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"toUser\" : 2,\r\n    \"message\": \"Hi, I want to share a product with you, may I?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/chat",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"chat"
+					]
+				},
+				"description": "Create a new client or company"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

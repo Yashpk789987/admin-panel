@@ -1,0 +1,1 @@
+export const apiUrl = 'https://us-central1-arrow-289608.cloudfunctions.net/api'

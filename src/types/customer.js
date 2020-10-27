@@ -1,0 +1,1 @@
+export const SET_ALL_CUSTOMER = "SET_ALL_CUSTOMER";
